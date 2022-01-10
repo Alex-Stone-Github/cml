@@ -4,10 +4,16 @@
 
 int main() {
     printf("Hi there\n");
-    cml_Shape shape;
-    cml_Shape_New2(&shape, 3, 4);
-    cml_Tensor tensor;
-    cml_Tensor_Create(&tensor, &shape);
-    cml_Tensor_Print(&tensor);
+
+    cml_Shape originS, indexS;
+    cml_Tensor origin;
+    cml_Shape_New2(&originS, 3, 3);
+    cml_Shape_New2(&indexS, 1, 2);
+    cml_Tensor_Create(&origin, &originS);
+    cml_Tensor_PrintDouble(&origin);
+    cml_Shape_Print(&indexS);
+    
+    unsigned int ind = cml_Tensor_ComputeIndex(&(origin.shape), &indexS);
+    printf("%u\n", ind);
     return 0;
 }
