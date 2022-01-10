@@ -10,10 +10,12 @@ int main() {
     cml_Shape_New2(&originS, 3, 3);
     cml_Shape_New2(&indexS, 1, 2);
     cml_Tensor_Create(&origin, &originS);
+    cml_Tensor_FillWithRandom(&origin);
     cml_Tensor_PrintDouble(&origin);
     cml_Shape_Print(&indexS);
     
-    unsigned int ind = cml_Tensor_ComputeIndex(&(origin.shape), &indexS);
-    printf("%u\n", ind);
+    cml_Tensor_SetValue(&origin, &indexS, 4.4);
+    double ind = cml_Tensor_GetValue(&origin, &indexS);
+    printf("%lf\n", ind);
     return 0;
 }
