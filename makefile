@@ -1,6 +1,6 @@
 all: bin/app
 
-bin/app: obj/main.o obj/shape.o obj/tensor.o
+bin/app: obj/main.o obj/shape.o obj/tensor.o obj/models.o
 	gcc $^ -o $@
 
 obj/%.o: src/%.c
