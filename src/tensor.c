@@ -14,7 +14,7 @@ void cml_Tensor_Clone(cml_Tensor* src, cml_Tensor* dest) {
     dest->values = (double*)malloc(length * sizeof(double));
     memcpy(src->values, dest->values, length * sizeof(double));
 }
-void cml_Tensor_PrintDouble(cml_Tensor* tensor) {
+void cml_Tensor_Print(cml_Tensor* tensor) {
     cml_Shape_Print(&(tensor->shape));
     unsigned int length = cml_Shape_ComputeLength(&(tensor->shape));
     for (unsigned int i = 0; i < length; i ++) {
@@ -51,4 +51,36 @@ double cml_Tensor_GetValue(cml_Tensor* tensor, cml_Shape* indexShape) {
 void cml_Tensor_SetValue(cml_Tensor* tensor, cml_Shape* indexShape, double value) {
     unsigned int index = cml_Tensor_ComputeIndex(&(tensor->shape), indexShape);
     tensor->values[index] = value;
+}
+void cml_Tensor_Add(cml_Tensor* a, cml_Tensor* b, cml_Tensor* output) {
+    unsigned int length = cml_Shape_ComputeLength(&(a->shape));
+    for (unsigned int i = 0; i < length; i ++) {
+        output->values[i] = a->values[i] + b->values[i];
+    }
+}
+void cml_Tensor_Sub(cml_Tensor* a, cml_Tensor* b, cml_Tensor* output) {
+    unsigned int length = cml_Shape_ComputeLength(&(a->shape));
+    for (unsigned int i = 0; i < length; i ++) {
+        output->values[i] = a->values[i] - b->values[i];
+    }
+}
+void cml_Tensor_Mul(cml_Tensor* a, cml_Tensor* b, cml_Tensor* output) {
+    unsigned int length = cml_Shape_ComputeLength(&(a->shape));
+    for (unsigned int i = 0; i < length; i ++) {
+        output->values[i] = a->values[i] * b->values[i];
+    }
+}
+void cml_Tensor_Div(cml_Tensor* a, cml_Tensor* b, cml_Tensor* output) {
+    unsigned int length = cml_Shape_ComputeLength(&(a->shape));
+    for (unsigned int i = 0; i < length; i ++) {
+        output->values[i] = a->values[i] / b->values[i];
+    }
+}
+double cml_Tensor_Dot(cml_Tensor* a, cml_Tensor* b) {
+    unsigned int length = cml_Shape_ComputeLength(&(a->shape));
+    double output = 0;
+    for (unsigned int i = 0; i < length; i ++) {
+        output += a->values[i] + b->values[i];
+    }
+    return output;
 }

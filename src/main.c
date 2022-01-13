@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "shape.h"
-#include "tensor.h"
+
+#include "cml.h"
 
 int main() {
     printf("Hi there\n");
@@ -11,7 +11,7 @@ int main() {
     cml_Shape_New2(&indexS, 1, 2);
     cml_Tensor_Create(&origin, &originS);
     cml_Tensor_FillWithRandom(&origin);
-    cml_Tensor_PrintDouble(&origin);
+    cml_Tensor_Print(&origin);
     cml_Shape_Print(&indexS);
     
     cml_Tensor_SetValue(&origin, &indexS, 4.4);
